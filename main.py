@@ -5,21 +5,22 @@
     - si elegimos registro, creara un usuario en la bbdd
     - crear nota, mostrar nogtas, borrarlas
 """
+from users import actions
 
+make = actions.Actions
+
+# this is a menu whith my proyect of python
 print("""
 Acciones disponibles:
     -registro
     -login
 """)
-
+# start the action question "whit do u want to do"
 action = input("Que quieres hacer?: ")
-
+# condicional, log up
 if action == "registro":
-    print("\nok, Vamos a regustrarte en el sistema")
-    name = input("Cual es tu nombre?: ")
-    
+    make.registrer()
 
+# condicional, log in
 if action == "login":
-    print("vale, identificate en el sistema...")
-
-
+    make.login()
