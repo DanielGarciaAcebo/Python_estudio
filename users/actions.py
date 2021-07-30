@@ -8,6 +8,6 @@ class Actions:
             password = input("Introduce tu contraseña: ")
 
     def login(self):
-        print("vale, identificate en el sistema...")
+        print("\n vale, identificate en el sistema...")
         email = input("Cual es tu email?: ")
         password = input("Introduce tu contraseña: ")
