@@ -1,16 +1,10 @@
-import mysql.connector
+import users.connect as connect
 import datetime
 import hashlib
 
-database = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd="root",
-    database="master_python",
-    port="3306"
-)
-
-arrow = database.cursor(bufered=True)
+connect = connect.Conexion()
+database = connect[0]
+arrow = connect[1]
 
 class Usuario:
 
@@ -21,7 +15,7 @@ class Usuario:
         self.password = password
 
     def registrar(self):
-        """insert the values in db """
+        # insert the values in db
         sql ="INSERT INTO usuarios VALUES(null,%s, %s, %s, %s, %s)"
 
         # Encript the pasword
@@ -41,4 +35,18 @@ class Usuario:
         return result
 
     def identificar(self):
-        return self.nombre
+
+        # check if user exist
+        sql= "SELECT * FROM usuarios WHERE email = %s AND password = %s "
+
+        # Encript the pasword
+        cifrado = hashlib.sha256()
+        cifrado.update(self.password.encode("utf8"))
+
+        # data for the call
+        user = (self.email,cifrado.hexdigest())
+
+        arrow.execute(sql, user)
+        result = arrow.fetchone()
+
+        return result

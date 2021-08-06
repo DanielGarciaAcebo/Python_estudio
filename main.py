@@ -5,7 +5,7 @@
     - si elegimos registro, creara un usuario en la bbdd
     - crear nota, mostrar nogtas, borrarlas
 """
-from users import actions
+import users.actions as actions
 
 make = actions.Actions
 
